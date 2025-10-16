@@ -15,4 +15,9 @@ public class IndexController {
     public String test(){
         return "temp/test";
     }
+
+    @GetMapping("/temp/bban")
+    public String bBan(){
+        return "temp/bban";
+    }
 }

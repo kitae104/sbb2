@@ -2,12 +2,10 @@ package com.mysite.sbb.question.controller;
 
 import com.mysite.sbb.question.dto.QuestionDto;
 import com.mysite.sbb.question.entity.Question;
-import com.mysite.sbb.question.repository.QuestionRepository;
 import com.mysite.sbb.question.service.QuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

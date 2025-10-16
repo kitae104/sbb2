@@ -6,17 +6,37 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-    <h1 th:text="${question.subject}">질문 상세</h1>
-    <div th:text="${question.content}"></div>
-    <h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
-    <div>
-        <ul>
-            <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
-        </ul>
+<div class="container my-3">
+    <h2 class="border-bottom py-2" th:text="${question.subject}">질문 상세</h2>
+    <div class="card my-3 bg-warning-subtle">
+        <div class="card-body">
+            <div class="card-text" th:text="${question.content}"></div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-danger text-white p-2 text-start mx-3">
+                    <div th:text="${#temporals.format(question.created, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <form th:action="@{|/answer/create/${question.id}|}" method="post">
-        <textarea id="content" name="content" rows="10"></textarea>
-        <input type="submit" value="답변 제출">
+
+    <h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+
+    <div class="card my-3" th:each="answer : ${question.answerList}">
+        <div class="card-body">
+            <div class="card-text" th:text="${answer.content}"></div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div th:text="${#temporals.format(answer.created, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form class="my-3" th:action="@{|/answer/create/${question.id}|}" method="post">
+        <textarea class="form-control" id="content" name="content" rows="10"></textarea>
+        <input class="btn btn-primary my-3" type="submit" value="답변 제출">
     </form>
+</div>
+
 </body>
 </html>
