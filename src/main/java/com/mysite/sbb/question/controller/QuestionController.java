@@ -6,6 +6,7 @@ import com.mysite.sbb.question.service.QuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,10 +23,11 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping("/list")
-    public String list(Model model){
-        List<Question> questionList = questionService.getQuestionList();
-        System.out.println("questionList : " + questionList );
-        model.addAttribute("questionList", questionList);
+    public String list(Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page){
+        Page<Question> paging = questionService.getQuestionList(page);
+        System.out.println("=== paging : " + paging );
+        model.addAttribute("paging", paging);
         return "question/list";
     }
 
