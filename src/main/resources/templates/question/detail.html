@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-</head>
-<body>
-<div class="container my-3">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+
+<div layout:fragment="content" class="container my-3">
     <h2 class="border-bottom py-2" th:text="${question.subject}">질문 상세</h2>
     <div class="card my-3 bg-warning-subtle">
         <div class="card-body">
@@ -37,6 +35,4 @@
         <input class="btn btn-primary my-3" type="submit" value="답변 제출">
     </form>
 </div>
-
-</body>
 </html>
