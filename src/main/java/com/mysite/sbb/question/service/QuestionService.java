@@ -1,5 +1,6 @@
 package com.mysite.sbb.question.service;
 
+import com.mysite.sbb.member.entity.Member;
 import com.mysite.sbb.question.dto.QuestionDto;
 import com.mysite.sbb.question.entity.Question;
 import com.mysite.sbb.question.repository.QuestionRepository;
@@ -42,10 +43,11 @@ public class QuestionService {
 //        }
     }
 
-    public void create(QuestionDto questionDto) {
+    public void create(QuestionDto questionDto, Member member) {
         Question question = Question.builder()
                 .subject(questionDto.getSubject())
                 .content(questionDto.getContent())
+                .author(member)
                 .build();
         questionRepository.save(question);
 

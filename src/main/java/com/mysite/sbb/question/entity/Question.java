@@ -1,6 +1,8 @@
 package com.mysite.sbb.question.entity;
 
 import com.mysite.sbb.answer.entity.Answer;
+import com.mysite.sbb.audit.BaseEntity;
+import com.mysite.sbb.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,8 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)
-public class Question {
+public class Question extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
@@ -29,9 +30,10 @@ public class Question {
     @Column(columnDefinition = "TEXT")
     private String content; // 질문 내용
 
-    @CreatedDate
-    private LocalDateTime created;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question",cascade = CascadeType.ALL)
     private List<Answer> answerList;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="member_id", nullable = false)
+    private Member author;
 }

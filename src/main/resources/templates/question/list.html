@@ -11,6 +11,7 @@
         <tr>
             <th>번호</th>
             <th>제목</th>
+            <th>작성자</th>
             <th>작성일</th>
         </tr>
         </thead>
@@ -21,6 +22,7 @@
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
                 <span class="badge bg-primary" th:if="${#lists.size(question.answerList) > 0}" th:text="${#lists.size(question.answerList)}"></span>
             </td>
+            <td th:text="${question.author.username}"></td>
             <td th:text="${#temporals.format(question.created, 'yyyy-MM-dd HH:mm:ss')}">날짜1</td>
         </tr>
         </tbody>
