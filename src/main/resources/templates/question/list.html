@@ -16,9 +16,10 @@
         </thead>
         <tbody>
         <tr th:each="question, loop : ${paging}">
-            <td th:text="${loop.count + (paging.number * paging.size)}"></td>
+            <td th:text="${paging.totalElements - loop.index - (paging.number * paging.size)}"></td>
             <td>
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                <span class="badge bg-primary" th:if="${#lists.size(question.answerList) > 0}" th:text="${#lists.size(question.answerList)}"></span>
             </td>
             <td th:text="${#temporals.format(question.created, 'yyyy-MM-dd HH:mm:ss')}">날짜1</td>
         </tr>

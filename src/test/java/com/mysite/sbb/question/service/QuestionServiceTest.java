@@ -24,7 +24,7 @@ class QuestionServiceTest {
                     .build();
             questionService.create(questionDto);
         }
-        System.out.println("==== Size : " + questionService.getQuestionList().size());
+//        System.out.println("==== Size : " + questionService.getQuestionList().size());
 
 
     }
