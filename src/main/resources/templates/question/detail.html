@@ -25,8 +25,9 @@
                    sec:authorize="isAuthenticated()"
                    th:if="${#authentication.getPrincipal().getUsername() == question.author.username}"
                 >수정</a>
-                <a href="#"
-                   class="btn btn-sm btn-outline-danger"
+                <a href="javascript:void(0);"
+                   th:data-uri="@{|/question/delete/${question.id}|}"
+                   class="delete btn btn-sm btn-outline-danger"
                    sec:authorize="isAuthenticated()"
                    th:if="${#authentication.getPrincipal().getUsername()
                                 == question.author.username}"
@@ -50,13 +51,14 @@
             </div>
             <!-- 수정 / 삭제 -->
             <div>
-                <a href="#"
+                <a th:href="@{|/answer/modify/${answer.id}|}"
                    class="btn btn-sm btn-outline-primary"
                    sec:authorize="isAuthenticated()"
                    th:if="${#authentication.getPrincipal().getUsername() == answer.author.username}"
                 >수정</a>
-                <a href="#"
-                   class="btn btn-sm btn-outline-danger"
+                <a href="javascript:void(0);"
+                   th:data-uri="@{|/answer/delete/${answer.id}|}"
+                   class="delete btn btn-sm btn-outline-danger"
                    sec:authorize="isAuthenticated()"
                    th:if="${#authentication.getPrincipal().getUsername()
                                 == answer.author.username}"
@@ -71,4 +73,16 @@
         <input class="btn btn-primary my-3" type="submit" value="답변 제출">
     </form>
 </div>
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".delete").click(function() {
+                if(confirm("정말 삭제할까요?")){
+                    const uri = $(this).data('uri');
+                    window.location.href = uri;
+                }
+            })
+        });
+    </script>
+</th:block>
 </html>
